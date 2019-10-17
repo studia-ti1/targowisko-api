@@ -75,6 +75,8 @@ GEM
     crass (1.0.4)
     erubi (1.9.0)
     execjs (2.7.0)
+    faraday (0.17.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -83,6 +85,11 @@ GEM
     io-like (0.3.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
+    json (2.2.0)
+    koala (3.0.0)
+      addressable
+      faraday
+      json (>= 1.8)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -100,6 +107,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.12.2)
     msgpack (1.3.1)
+    multipart-post (2.1.1)
     nio4r (2.5.2)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
@@ -196,6 +204,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
+  koala
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
