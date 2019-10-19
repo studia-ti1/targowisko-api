@@ -1,15 +1,21 @@
 # frozen_string_literal: true
 
 class MarketsController < ApplicationController
+  include Pagy::Backend
+
   def index
-    # TODO: pagination
-    @markets = Market.all
+    @markets = if Market.count != 0
+                 _, paginated_collection = pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
+                 paginated_collection
+               else
+                 []
+            end
+
     render json: @markets
   end
 
   def fetch_from_api
-    @graph.get_object('me', field: ['events'])
-    @graph.dig('events', 'data').each { |event| create_market_if_needed(event) }
+    @profile.dig('events', 'data').each { |event| create_market_if_needed(event) }
 
     render json: { status: 'success' }, status: :created
   end
@@ -20,6 +26,6 @@ class MarketsController < ApplicationController
     return if Market.where(facebook_event_id: event['id']).present?
 
     Market.create!(name: event['name'], description: event['description'],
-                   facebook_event_id: event['id'], location: event['location'])
+                   facebook_event_id: event['id'], location: event['place'], user: @user)
   end
 end
