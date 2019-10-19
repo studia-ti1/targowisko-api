@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateMarketRatings < ActiveRecord::Migration[5.2]
   def change
     create_table :market_ratings do |t|

@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  scope '/api/v1' do
+    get 'markets/index', to: 'markets#index'
+    post 'markets/fetch_from_api', to: 'markets#fetch_from_api'
+  end
 end
