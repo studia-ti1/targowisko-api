@@ -4,7 +4,6 @@ class MarketSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :facebook_event_id, :location
 
   belongs_to :user
-  has_many :products_markets
-  has_many :products, through: :products_markets
+  has_many :products
   has_many :market_ratings
 end
