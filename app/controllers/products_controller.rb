@@ -5,12 +5,12 @@ class ProductsController < ApplicationController
 
   def index
     user_products = @user.products
-    @products = if user_products.size != 0
-                 _, paginated_collection = pagy(user_products, items: params[:items] || user_products.size, page: params[:page] || 1)
-                 paginated_collection
-               else
-                 []
-               end
+    @products = if !user_products.empty?
+                  _, paginated_collection = pagy(user_products, items: params[:items] || user_products.size, page: params[:page] || 1)
+                  paginated_collection
+                else
+                  []
+                end
 
     render json: @products
   end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 
 class MarketFetchWorker
@@ -11,7 +12,7 @@ class MarketFetchWorker
     ids.each do |id|
       event = graph.get_object(id, fields: %w[name description id place cover])
       market = Market.create!(name: event['name'], description: event['description'],
-        facebook_event_id: event['id'], location: event['place'], user_id: user_id)
+                              facebook_event_id: event['id'], location: event['place'], user_id: user_id)
       market.remote_image_url = event.dig('cover', 'source')
       market.save!
     end

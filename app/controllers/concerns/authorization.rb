@@ -19,8 +19,8 @@ module Authorization
 
     def create_user_if_needed
       @profile = @profile.get_object('me', fields: %w[email first_name last_name events])
-      User.create!(email: @profile['email'], first_name: @profile['first_name'], last_name: @profile['last_name']) unless User.where(email: @profile['email']).present?
-      @user = User.find_by_email(@profile['email'])
+      User.create!(email: @profile['email'], first_name: @profile['first_name'], last_name: @profile['last_name']) if User.where(email: @profile['email']).blank?
+      @user = User.find_by(email: @profile['email'])
     end
   end
 end
