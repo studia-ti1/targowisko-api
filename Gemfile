@@ -22,6 +22,11 @@ gem 'active_model_serializers'
 # for background jobs
 gem 'sidekiq'
 
+# file uploading
+gem 'carrierwave', '~> 2.0'
+# Azure BlobStorage integration
+gem 'carrierwave-azure'
+
 gem 'rack-cors'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
