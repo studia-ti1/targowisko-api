@@ -2,6 +2,7 @@
 
 class MarketsController < ApplicationController
   include Pagy::Backend
+  before_action :set_market, only: %i[show update]
 
   def index
     @markets = Market.count != 0 ? pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1) : []
@@ -9,7 +10,7 @@ class MarketsController < ApplicationController
   end
 
   def show
-    render json: Market.find(params[:id])
+    render json: @market
   end
 
   def create_markets
@@ -18,8 +19,7 @@ class MarketsController < ApplicationController
   end
 
   def update
-    market = Market.find(params[:id])
-    market.update(market_params)
+    @market.update(market_params)
     render json: market
   end
 
@@ -50,6 +50,10 @@ class MarketsController < ApplicationController
   end
 
   private
+
+  def set_market
+    @market = Market.find(params[:id])
+  end
 
   def market_params
     params.permit(:name, :description, :category, :avatar, :location, facebook_events_ids: [])
