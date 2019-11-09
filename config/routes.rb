@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :user
 
     post 'markets/fetch_from_api', to: 'markets#fetch_from_api'
+    post 'create_markets', to: 'markets#create_markets'
   end
 end

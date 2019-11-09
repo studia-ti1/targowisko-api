@@ -9,7 +9,7 @@ module ExceptionsHandlers
     rescue_from CustomExceptions::AuthenticationError, with: :token_error
 
     def record_not_found(e)
-      render json: { errors: [e.message] }, status: :not_found
+      render json: { errors: ['The object with given id could not be found'] }, status: :not_found
       end
 
     def record_invalid(e)

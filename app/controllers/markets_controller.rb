@@ -4,13 +4,7 @@ class MarketsController < ApplicationController
   include Pagy::Backend
 
   def index
-    @markets = if Market.count != 0
-                 _, paginated_collection = pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
-                 paginated_collection
-               else
-                 []
-            end
-
+    @markets = Market.count != 0 ? pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1) : []
     render json: @markets
   end
 
@@ -18,8 +12,9 @@ class MarketsController < ApplicationController
     render json: Market.find(params[:id])
   end
 
-  def create
-    render json: create_market_if_needed
+  def create_markets
+    MarketFetchWorker.perform_async(market_params[:facebook_events_ids], request.headers['HTTP_ACCESS_TOKEN'], @user.id)
+    render json: { success: true }
   end
 
   def update
@@ -30,8 +25,7 @@ class MarketsController < ApplicationController
 
   def destroy
     @user.markets.destroy(params[:id])
-
-    render json: { status: 'deleted' }
+    render json: { success: true }
   end
 
   def fetch_from_api
@@ -58,13 +52,6 @@ class MarketsController < ApplicationController
   private
 
   def market_params
-    params.permit(:name, :description, :category, :avatar, :location)
-  end
-
-  def create_market_if_needed
-    return if Market.where(facebook_event_id: params['id']).present?
-
-    Market.create!(name: params['name'], description: params['description'],
-                   facebook_event_id: params['id'], location: params['place'], user: @user)
+    params.permit(:name, :description, :category, :avatar, :location, facebook_events_ids: [])
   end
 end
