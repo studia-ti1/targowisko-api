@@ -20,7 +20,7 @@ class MarketsController < ApplicationController
 
   def update
     @market.update(market_params)
-    render json: market
+    render json: @market
   end
 
   def destroy
