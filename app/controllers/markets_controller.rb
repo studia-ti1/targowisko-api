@@ -5,7 +5,11 @@ class MarketsController < ApplicationController
   before_action :set_market, only: %i[show update]
 
   def index
-    @markets = Market.count != 0 ? pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1) : []
+    if Market.count != 0
+      _, @markets = pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
+    else
+      @markets = []
+    end
     render json: @markets
   end
 
@@ -30,7 +34,10 @@ class MarketsController < ApplicationController
 
   def fetch_from_api
     events = []
-    @profile.dig('events', 'data').each { |event| events << event.extract!('name', 'description', 'id', 'place') }
+    events_from_profile = @profile.dig('events', 'data')
+    return render json: {} unless events_from_profile
+
+    events_from_profile.each { |event| events << event.extract!('name', 'description', 'id', 'place') }
 
     render json: events
   end
