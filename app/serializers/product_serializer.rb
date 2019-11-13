@@ -10,5 +10,4 @@ class ProductSerializer < ActiveModel::Serializer
   def owner
     object.user
   end
-
 end
