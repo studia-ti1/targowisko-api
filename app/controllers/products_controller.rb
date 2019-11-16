@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    render json: @user.products.create(product_params)
+    render json: @user.products.create!(product_params)
   end
 
   def destroy
@@ -39,6 +39,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.permit(:name, :price, :picture, :category)
+    params.permit(:name, :price, :category, :picture)
   end
 end
