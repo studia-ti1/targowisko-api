@@ -25,7 +25,7 @@ gem 'sidekiq'
 # file uploading
 gem 'carrierwave', '~> 2.0'
 # Azure BlobStorage integration
-gem 'carrierwave-azure'
+gem 'carrierwave-azure', git: 'https://github.com/cmager/carrierwave-azure.git'
 
 gem 'rack-cors'
 # See https://github.com/rails/execjs#readme for more supported runtimes

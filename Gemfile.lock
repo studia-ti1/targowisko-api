@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/cmager/carrierwave-azure.git
+  revision: 9eebe12d90022d5c0e501ec531bf0171e94931a2
+  specs:
+    carrierwave-azure (0.0.3)
+      azure
+      carrierwave
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -86,9 +94,6 @@ GEM
       image_processing (~> 1.1)
       mimemagic (>= 0.3.0)
       mini_mime (>= 0.1.3)
-    carrierwave-azure (0.0.3)
-      azure
-      carrierwave
     case_transform (0.2)
       activesupport
     childprocess (3.0.0)
@@ -279,7 +284,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   carrierwave (~> 2.0)
-  carrierwave-azure
+  carrierwave-azure!
   chromedriver-helper
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
