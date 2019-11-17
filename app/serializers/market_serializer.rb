@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MarketSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :facebook_event_id, :location, :owner, :image
+  attributes :id, :name, :description, :facebook_event_id, :place, :owner, :image
 
   belongs_to :user
   has_many :products

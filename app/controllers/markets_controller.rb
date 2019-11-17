@@ -3,7 +3,7 @@
 class MarketsController < ApplicationController
   include Pagy::Backend
   DEFAULT_NUMBER_OF_TOP_MARKETS = 5
-  before_action :set_market, only: %i[show update]
+  before_action :set_market, only: %i[show update add_product remove_product]
 
   def index
     if Market.count != 0
@@ -52,17 +52,17 @@ class MarketsController < ApplicationController
   end
 
   def add_product
-    market_products = Market.find(params[:market_id]).products
+    market_products = @market.products
     market_products << @user.products.find(params[:product_id])
-    render json: market_products
+    render json: @market
   end
 
   def remove_product
-    market_products = Market.find(params[:market_id]).products
+    market_products = @market.products
     user_product = @user.products.find(params[:product_id])
     market_products.destroy(user_product)
 
-    render json: market_products
+    render json: @market
   end
 
   private
@@ -72,6 +72,6 @@ class MarketsController < ApplicationController
   end
 
   def market_params
-    params.permit(:name, :description, :category, :avatar, :location, facebook_events_ids: [])
+    params.permit(:name, :description, :category, :avatar, :place, facebook_events_ids: [])
   end
 end
