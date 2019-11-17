@@ -2,6 +2,7 @@
 
 class MarketsController < ApplicationController
   include Pagy::Backend
+  DEFAULT_NUMBER_OF_TOP_MARKETS = 5
   before_action :set_market, only: %i[show update]
 
   def index
@@ -11,6 +12,14 @@ class MarketsController < ApplicationController
       @markets = []
     end
     render json: @markets
+  end
+
+  def top_markets
+    top_markets_avg_ids = MarketRating.group(:market_id).average(:rating).sort { |a, b| b[1] <=> a[1] }.first(params[:count].to_i || DEFAULT_NUMBER_OF_TOP_MARKETS)
+    top_markets_ids = top_markets_avg_ids.map(&:first)
+    markets = Market.where(id: top_markets_ids)
+
+    render json: markets
   end
 
   def show
