@@ -72,6 +72,6 @@ class MarketsController < ApplicationController
   end
 
   def market_params
-    params.permit(:name, :description, :category, :avatar, :place, facebook_events_ids: [])
+    params.permit(:name, :description, :category, :avatar, :place, :category, facebook_events_ids: [])
   end
 end
