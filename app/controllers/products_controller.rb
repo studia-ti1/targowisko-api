@@ -2,6 +2,7 @@
 
 class ProductsController < ApplicationController
   include Pagy::Backend
+  DEFAULT_NUMBER_OF_TOP_PRODUCTS = 5
 
   def index
     user_products = @user.products
@@ -34,6 +35,14 @@ class ProductsController < ApplicationController
     product.update(product_params)
 
     render json: product
+  end
+
+  def top_products
+    top_products_avg_ids = ProductRating.group(:product_id).average(:rating).sort { |a, b| b[1] <=> a[1] }.first(params[:count].to_i || DEFAULT_NUMBER_OF_TOP_PRODUCTS)
+    top_products_ids = top_products_avg_ids.map(&:first)
+    products = Product.where(id: top_products_ids)
+
+    render json: products
   end
 
   private

@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     resources :user
 
     get '/top_markets', to: 'markets#top_markets'
+    get '/top_products', to: 'products#top_products'
     post 'markets/fetch_from_api', to: 'markets#fetch_from_api'
     post 'products/:product_id/rate', to: 'product_ratings#create'
+    post 'markets/:market_id/rate', to: 'market_ratings#create'
     post 'create_markets', to: 'markets#create_markets'
   end
 end
