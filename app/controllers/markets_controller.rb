@@ -7,8 +7,7 @@ class MarketsController < ApplicationController
 
   def index
     if Market.count != 0
-      markets_loc = Market.where(category: params[:category]) if params[:category]
-      _, @markets = pagy(markets_loc || Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
+      _, @markets = pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
     else
       @markets = []
     end
