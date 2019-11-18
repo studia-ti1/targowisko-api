@@ -5,15 +5,15 @@ class ProductsController < ApplicationController
   DEFAULT_NUMBER_OF_TOP_PRODUCTS = 5
 
   def index
-    user_products = @user.products
-    @products = if !user_products.empty?
-                  _, paginated_collection = pagy(user_products, items: params[:items] || user_products.size, page: params[:page] || 1)
+    products = Product.all.by_user(params[:user_id]).by_name(params[:search_value]).by_market(params[:market_id])
+    products = if !products.empty?
+                  _, paginated_collection = pagy(products, items: params[:items] || products.size, page: params[:page] || 1)
                   paginated_collection
                 else
                   []
                 end
 
-    render json: @products
+    render json: products
   end
 
   def show
