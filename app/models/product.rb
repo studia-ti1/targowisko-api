@@ -12,6 +12,7 @@ class Product < ApplicationRecord
   validates :category, presence: true
   # == Scopes ============================
   scope :by_user, ->(user_id) { where(user_id: user_id) unless user_id.nil? }
+  scope :by_category, ->(category) { where(category: category) if category }
   scope :by_name, ->(product_name) { where('name LIKE ?', "%#{product_name}%") unless product_name.nil? }
   scope :by_market, ->(market_id) { joins(:products_markets).where(products_markets: { market_id: market_id }) unless market_id.nil? }
   # == Enums =============================
