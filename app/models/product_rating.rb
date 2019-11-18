@@ -10,7 +10,7 @@ class ProductRating < ApplicationRecord
   after_commit :update_product_rating
 
   def update_product_rating
-    new_rating = product.product_ratings.average(:rating)
+    new_rating = product.product_ratings.average(:rating).round(1, half: :up)
     product.update(average_rating: new_rating)
   end
 end
