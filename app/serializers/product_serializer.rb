@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :name, :price, :picture, :owner
+  attributes :id, :name, :price, :picture, :owner, :average_rating
 
   belongs_to :user
   has_many :markets

@@ -7,11 +7,11 @@ class ProductsController < ApplicationController
   def index
     products = Product.all.by_user(params[:user_id]).by_name(params[:search_value]).by_market(params[:market_id])
     products = if !products.empty?
-                  _, paginated_collection = pagy(products, items: params[:items] || products.size, page: params[:page] || 1)
-                  paginated_collection
-                else
-                  []
-                end
+                 _, paginated_collection = pagy(products, items: params[:items] || products.size, page: params[:page] || 1)
+                 paginated_collection
+               else
+                 []
+               end
 
     render json: products
   end
