@@ -7,7 +7,8 @@ class MarketsController < ApplicationController
 
   def index
     if Market.count != 0
-      _, @markets = pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
+      markets_loc = Market.where(category: params[:category]) if params[:category]
+      _, @markets = pagy(markets_loc, items: params[:items] || Market.count, page: params[:page] || 1)
     else
       @markets = []
     end
@@ -72,6 +73,6 @@ class MarketsController < ApplicationController
   end
 
   def market_params
-    params.permit(:name, :description, :category, :avatar, :place, facebook_events_ids: [])
+    params.permit(:name, :description, :category, :avatar, :place, :category, facebook_events_ids: [])
   end
 end

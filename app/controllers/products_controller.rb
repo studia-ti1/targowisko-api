@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   DEFAULT_NUMBER_OF_TOP_PRODUCTS = 5
 
   def index
-    products = Product.all.by_user(params[:user_id]).by_name(params[:search_value]).by_market(params[:market_id])
+    products = Product.all.by_category(params[:category]).by_user(params[:user_id]).by_name(params[:search_value]).by_market(params[:market_id])
     products = if !products.empty?
                  _, paginated_collection = pagy(products, items: params[:items] || products.size, page: params[:page] || 1)
                  paginated_collection
@@ -48,6 +48,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.permit(:name, :price, :category, :picture)
+    params.permit(:name, :price, :category, :picture, :category)
   end
 end

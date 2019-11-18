@@ -6,4 +6,8 @@ class Market < ApplicationRecord
   has_many :products_markets, dependent: :destroy
   has_many :products, through: :products_markets
   has_many :market_ratings
+  # == Validations =======================
+  validates :category, presence: true
+  # == Enums =============================
+  include CategoryEnum
 end
