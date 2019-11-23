@@ -5,6 +5,7 @@ class MarketsController < ApplicationController
   DEFAULT_NUMBER_OF_TOP_MARKETS = 5
   before_action :set_market, only: %i[show update add_product remove_product]
 
+  # GET /api/v1/markets
   def index
     markets = Market.all.by_user(params[:user_id]).by_name(params[:search_value]).by_product(params[:product_id])
     markets = if !markets.empty?
@@ -17,6 +18,7 @@ class MarketsController < ApplicationController
     render json: markets
   end
 
+  # GET api/v1/top_markets
   def top_markets
     top_markets_avg_ids = MarketRating.group(:market_id).average(:rating).sort { |a, b| b[1] <=> a[1] }.first(params[:count].to_i || DEFAULT_NUMBER_OF_TOP_MARKETS)
     top_markets_ids = top_markets_avg_ids.map(&:first)
@@ -25,25 +27,30 @@ class MarketsController < ApplicationController
     render json: markets
   end
 
+  # GET /api/v1/markets/:id
   def show
     render json: @market
   end
 
+  # POST /api/v1/create_markets
   def create_markets
     MarketFetchWorker.perform_async(market_params[:facebook_events_ids], request.headers['HTTP_ACCESS_TOKEN'], @user.id)
     render json: { success: true }
   end
 
+  # PATCH/PUT /api/v1/markets/:id
   def update
     @market.update(market_params)
     render json: @market
   end
 
+  # DELETE /api/v1/markets/:id
   def destroy
     @user.markets.destroy(params[:id])
     render json: { success: true }
   end
 
+  # POST /api/v1/markets/fetch_from_api
   def fetch_from_api
     events = []
     events_from_profile = @profile.dig('events', 'data')
@@ -53,13 +60,14 @@ class MarketsController < ApplicationController
 
     render json: events
   end
-
+  # POST /api/v1/markets/:id/add_product
   def add_product
     market_products = @market.products
     market_products << @user.products.find(params[:product_id])
     render json: @market
   end
 
+  # DELETE /api/v1/markets/:id/remove_product
   def remove_product
     market_products = @market.products
     user_product = @user.products.find(params[:product_id])
