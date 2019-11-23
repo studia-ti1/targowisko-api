@@ -6,12 +6,14 @@ class MarketsController < ApplicationController
   before_action :set_market, only: %i[show update add_product remove_product]
 
   def index
-    if Market.count != 0
-      _, @markets = pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
-    else
-      @markets = []
-    end
-    render json: @markets
+    markets = Market.all.by_user(params[:user_id]).by_name(params[:search_value]).by_product(params[:product_id])
+    markets = if !products.empty?
+                _, paginated_collection = pagy(markets, items: params[:items] || markets, page: params[:page] || 1)
+                paginated_collection
+              else
+                []
+              end
+    render json: markets
   end
 
   def top_markets
