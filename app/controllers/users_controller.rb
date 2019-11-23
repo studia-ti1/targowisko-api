@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = []
-    User.all.each do |user|
+    User.all.by_first_name(params[:user_first_name]).by_last_name(params[:user_last_name]).each do |user|
       @users << user unless user.products.empty?
     end
 

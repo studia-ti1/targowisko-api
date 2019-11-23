@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :last_name, :first_name, :email
+  attributes :id, :last_name, :first_name, :email, :products_count
 
   has_many :products
   has_many :markets
