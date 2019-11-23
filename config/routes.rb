@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       end
     end
     resources :products
-    resources :user
+    resources :users
 
     get '/top_markets', to: 'markets#top_markets'
     get '/top_products', to: 'products#top_products'
