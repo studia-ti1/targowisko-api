@@ -6,9 +6,13 @@ class UsersController < ApplicationController
   def index
     @users = []
     User.all.each do |user|
-      @users << user unless user.products.nil?
+      @users << user unless user.products.empty?
     end
 
     render json: @users
+  end
+
+  def show
+    render json: User.find(params[:id])
   end
 end
