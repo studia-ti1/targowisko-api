@@ -474,3 +474,4 @@ paths:
           description: User found
         '401':
           description: Unauthorized
+
