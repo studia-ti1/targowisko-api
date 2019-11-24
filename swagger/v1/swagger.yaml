@@ -93,6 +93,25 @@ paths:
           description: Updated Market info
         '401':
           description: Unauthorized
+    delete:
+      summary: Delete Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Destroy the Market
+        '401':
+          description: Unauthorized
   "/api/v1/create_markets":
     post:
       summary: Create new Market
@@ -101,11 +120,6 @@ paths:
       consumes:
       - application/json
       parameters:
-      - name: id
-        in: path
-        schema:
-        - type: string
-        required: true
       - name: access-token
         in: header
         schema:
@@ -119,12 +133,9 @@ paths:
               type: array
               items:
                 type: integer
-          required:
-          - name
-          - status
       responses:
         '200':
-          description: Saved Markets found
+          description: Created Market
         '401':
           description: Unauthorized
   "/api/v1/markets/fetch_from_api":
@@ -139,6 +150,57 @@ paths:
         - type: string
       responses:
         '200':
-          description: Saved Markets found
+          description: Facebook Events found
+        '401':
+          description: Unauthorized
+  "/api/v1/top_markets":
+    get:
+      summary: Get top rated Markets
+      tags:
+      - Markets
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: count
+        in: body
+        schema:
+          type: object
+          properties:
+            count:
+              type: integer
+      responses:
+        '200':
+          description: Top Markets
+        '401':
+          description: Unauthorized
+  "/api/v1/markets/{id}/add_product":
+    post:
+      summary: Add product to the Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product_id
+        in: body
+        schema:
+          type: object
+          properties:
+            product_id:
+              type: integer
+      responses:
+        '200':
+          description: Facebook Events found
         '401':
           description: Unauthorized

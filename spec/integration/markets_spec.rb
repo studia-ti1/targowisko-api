@@ -76,6 +76,26 @@ describe 'Markets API' do
         end
       end
 
+      delete 'Delete Market' do
+        tags 'Markets'
+        parameter name: :id, :in => :path, schema:[ type: :string]
+        parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+
+
+        response '200', 'Destroy the Market' do
+          #let(:id) do
+          #   {
+          #       success: true
+          #   }
+          #end
+          run_test!
+        end
+
+        response '401', 'Unauthorized' do
+          run_test!
+        end
+      end
+
     end
 
     path '/api/v1/create_markets' do
@@ -83,14 +103,12 @@ describe 'Markets API' do
       post 'Create new Market' do
         tags 'Markets'
         consumes 'application/json'
-        parameter name: :id, :in => :path, schema:[ type: :string]
         parameter name: 'access-token', :in => :header, schema:[ type: :string ]
         parameter name: :event, in: :body, schema: {
             type: :object,
             properties: {
                 facebook_events_ids: { type: :array, items: {type: :integer} }
             },
-            required: [ 'name', 'status' ]
         }
 
         response '200', 'Created Market' do
@@ -110,6 +128,52 @@ describe 'Markets API' do
         parameter name: 'access-token', :in => :header, schema:[ type: :string ]
 
         response '200', 'Facebook Events found' do
+          run_test!
+        end
+
+        response '401', 'Unauthorized' do
+          run_test!
+        end
+      end
+    end
+
+    path '/api/v1/top_markets' do
+
+      get 'Get top rated Markets' do
+        tags 'Markets'
+        consumes 'application/json'
+        parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+        parameter name: :count, in: :body, schema: {
+            type: :object,
+            properties: {
+                count: { type: :integer }
+            }
+        }
+
+        response '200', 'Top Markets' do
+          run_test!
+        end
+
+        response '401', 'Unauthorized' do
+          run_test!
+        end
+      end
+    end
+
+    path '/api/v1/markets/{id}/add_product' do
+
+      post 'Add product to the Market' do
+        tags 'Markets'
+        parameter name: :id, :in => :path, schema:[ type: :string]
+        parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+        parameter name: :product_id, in: :body, schema: {
+            type: :object,
+            properties: {
+                product_id: { type: :integer }
+            }
+        }
+
+        response '200', 'Product added to the Market' do
           run_test!
         end
 
