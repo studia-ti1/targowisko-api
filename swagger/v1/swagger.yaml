@@ -19,3 +19,18 @@ paths:
           description: Saved Markets found
         '401':
           description: Unauthorized
+  "/api/v1/markets/fetch_from_api":
+    post:
+      summary: Retrieve user facebook events
+      tags:
+      - Markets
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Saved Markets found
+        '401':
+          description: Unauthorized

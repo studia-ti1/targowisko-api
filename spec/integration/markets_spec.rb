@@ -18,4 +18,21 @@ describe 'Markets API' do
         end
       end
     end
+
+    path '/api/v1/markets/fetch_from_api' do
+
+      post 'Retrieve user facebook events' do
+        tags 'Markets'
+        parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+
+        response '200', 'Saved Markets found' do
+          run_test!
+        end
+
+        response '401', 'Unauthorized' do
+          run_test!
+        end
+      end
+    end
+
 end
