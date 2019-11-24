@@ -5,11 +5,34 @@ describe 'Products API' do
 
   path '/api/v1/products' do
 
-    get 'Get all Products' do
+    get 'Get my Products' do
       tags 'Products'
       parameter name: 'access-token', :in => :header, schema:[ type: :string ]
 
       response '200', 'Products found' do
+        run_test!
+      end
+
+      response '401', 'Unauthorized' do
+        run_test!
+      end
+    end
+
+    get 'Get Products' do
+      tags 'Products'
+      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+      parameter name: :product, in: :body, schema: {
+          type: :object,
+          properties: {
+              search_value: { type: :string },
+              user_id: { type: :integer },
+              items: { type: :integer },
+              page: { type: :integer },
+              market_id: { type: :integer }
+          },
+      }
+
+      response '200', 'Filtered Products' do
         run_test!
       end
 

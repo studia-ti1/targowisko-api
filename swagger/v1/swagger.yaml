@@ -231,9 +231,40 @@ paths:
           description: Product deleted from the Market
         '401':
           description: Unauthorized
+  "/api/v1/products/{id}/rate":
+    post:
+      summary: Comment/rate Product
+      tags:
+      - Product Rating
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: rating
+        in: body
+        schema:
+          type: object
+          properties:
+            rating:
+              type: string
+            comment:
+              type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Product created
+        '401':
+          description: Unauthorized
   "/api/v1/products":
     get:
-      summary: Get all Products
+      summary: Get Products
       tags:
       - Products
       parameters:
@@ -241,9 +272,24 @@ paths:
         in: header
         schema:
         - type: string
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            search_value:
+              type: string
+            user_id:
+              type: integer
+            items:
+              type: integer
+            page:
+              type: integer
+            market_id:
+              type: integer
       responses:
         '200':
-          description: Products found
+          description: Filtered Products
         '401':
           description: Unauthorized
     post:
