@@ -201,6 +201,33 @@ paths:
               type: integer
       responses:
         '200':
-          description: Facebook Events found
+          description: Product added to the Market
+        '401':
+          description: Unauthorized
+  "/api/v1/markets/{id}/remove_product":
+    delete:
+      summary: Remove product from the Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product_id
+        in: body
+        schema:
+          type: object
+          properties:
+            product_id:
+              type: integer
+      responses:
+        '200':
+          description: Product deleted from the Market
         '401':
           description: Unauthorized

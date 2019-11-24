@@ -183,4 +183,27 @@ describe 'Markets API' do
       end
     end
 
+    path '/api/v1/markets/{id}/remove_product' do
+
+      delete 'Remove product from the Market' do
+        tags 'Markets'
+        parameter name: :id, :in => :path, schema:[ type: :string]
+        parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+        parameter name: :product_id, in: :body, schema: {
+            type: :object,
+            properties: {
+                product_id: { type: :integer }
+            }
+        }
+
+        response '200', 'Product deleted from the Market' do
+          run_test!
+        end
+
+        response '401', 'Unauthorized' do
+          run_test!
+        end
+      end
+    end
+
 end
