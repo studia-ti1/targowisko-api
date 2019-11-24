@@ -1,0 +1,21 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/markets":
+    get:
+      summary: Get saved Markets
+      tags:
+      - Markets
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Saved Markets found
+        '401':
+          description: Unauthorized
