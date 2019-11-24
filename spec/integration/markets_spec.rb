@@ -88,7 +88,6 @@ describe 'Markets API' do
         parameter name: :id, :in => :path, schema:[ type: :string]
         parameter name: 'access-token', :in => :header, schema:[ type: :string ]
 
-
         response '200', 'Destroy the Market' do
           #let(:id) do
           #   {

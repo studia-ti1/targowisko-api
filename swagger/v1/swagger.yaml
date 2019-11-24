@@ -174,8 +174,6 @@ paths:
       summary: Get top rated Markets
       tags:
       - Markets
-      consumes:
-      - application/json
       parameters:
       - name: access-token
         in: header
