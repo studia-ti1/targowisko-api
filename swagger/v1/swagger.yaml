@@ -19,9 +19,117 @@ paths:
           description: Saved Markets found
         '401':
           description: Unauthorized
+  "/api/v1/markets/{id}":
+    get:
+      summary: Get one saved Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Saved Market with id found
+        '401':
+          description: Unauthorized
+    patch:
+      summary: Update Market info
+      tags:
+      - Markets
+      consumes:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: market
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            place:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                location:
+                  type: object
+                  properties:
+                    zip:
+                      type: string
+                    city:
+                      type: string
+                    street:
+                      type: string
+                    country:
+                      type: string
+                    latitude:
+                      type: string
+                    longitude:
+                      type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Updated Market info
+        '401':
+          description: Unauthorized
+  "/api/v1/create_markets":
+    post:
+      summary: Create new Market
+      tags:
+      - Markets
+      consumes:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: event
+        in: body
+        schema:
+          type: object
+          properties:
+            facebook_events_ids:
+              type: array
+              items:
+                type: integer
+          required:
+          - name
+          - status
+      responses:
+        '200':
+          description: Saved Markets found
+        '401':
+          description: Unauthorized
   "/api/v1/markets/fetch_from_api":
     post:
-      summary: Retrieve user facebook events
+      summary: Retrieve user facebook Events
       tags:
       - Markets
       parameters:
