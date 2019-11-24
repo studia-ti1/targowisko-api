@@ -4,6 +4,37 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/markets/{id}/rate":
+    post:
+      summary: Comment/rate Market
+      tags:
+      - Market Rating
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: rating
+        in: body
+        schema:
+          type: object
+          properties:
+            rating:
+              type: integer
+            comment:
+              type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Product created
+        '401':
+          description: Unauthorized
   "/api/v1/markets":
     get:
       summary: Get saved Markets
@@ -252,7 +283,7 @@ paths:
           type: object
           properties:
             rating:
-              type: string
+              type: integer
             comment:
               type: string
       produces:
