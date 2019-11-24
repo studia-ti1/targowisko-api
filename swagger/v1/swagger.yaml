@@ -231,3 +231,140 @@ paths:
           description: Product deleted from the Market
         '401':
           description: Unauthorized
+  "/api/v1/products":
+    get:
+      summary: Get all Products
+      tags:
+      - Products
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Products found
+        '401':
+          description: Unauthorized
+    post:
+      summary: Create new Product
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            price:
+              type: integer
+            category:
+              type: string
+      responses:
+        '200':
+          description: Product created
+        '401':
+          description: Unauthorized
+  "/api/v1/products/{id}":
+    get:
+      summary: Get one Product with :id
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: The Product with :id found
+        '401':
+          description: Unauthorized
+    patch:
+      summary: Update Product info
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            price:
+              type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Updated Product info
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Delete Product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: The Product deleted
+        '401':
+          description: Unauthorized
+  "/api/v1/top_products":
+    get:
+      summary: Get top rated Products
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: count
+        in: body
+        schema:
+          type: object
+          properties:
+            count:
+              type: integer
+      responses:
+        '200':
+          description: Top Products
+        '401':
+          description: Unauthorized
