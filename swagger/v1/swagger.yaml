@@ -499,6 +499,6 @@ paths:
         - type: string
       responses:
         '200':
-          description: Saved Market with id found
+          description: User found
         '401':
           description: Unauthorized

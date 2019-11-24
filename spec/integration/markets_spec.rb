@@ -102,7 +102,6 @@ describe 'Markets API' do
           run_test!
         end
       end
-
     end
 
     path '/api/v1/create_markets' do
@@ -118,7 +117,7 @@ describe 'Markets API' do
             },
         }
 
-        response '200', 'Created Market' do
+        response '200', 'Market created' do
           run_test!
         end
 
