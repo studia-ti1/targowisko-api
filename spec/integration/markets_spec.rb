@@ -212,5 +212,4 @@ describe 'Markets API' do
         end
       end
     end
-
 end
