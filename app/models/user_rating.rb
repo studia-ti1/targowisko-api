@@ -8,7 +8,7 @@ class UserRating < ApplicationRecord
   after_commit :update_user_rating
 
   def update_user_rating
-    new_rating = user.user_ratings.average(:rating).round(1, half: :up)
+    new_rating = user.feedback.average(:rating).round(1, half: :up)
     user.update(average_rating: new_rating)
   end
 end

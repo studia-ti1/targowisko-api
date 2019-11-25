@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     post 'markets/fetch_from_api', to: 'markets#fetch_from_api'
     post 'products/:product_id/rate', to: 'product_ratings#create'
     post 'markets/:market_id/rate', to: 'market_ratings#create'
+    post 'users/:user_id/rate', to: 'user_ratings#create'
     post 'create_markets', to: 'markets#create_markets'
   end
 end
