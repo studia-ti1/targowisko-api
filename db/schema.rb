@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_23_122403) do
+ActiveRecord::Schema.define(version: 2019_11_25_125216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 2019_11_23_122403) do
     t.index ["product_id"], name: "index_products_markets_on_product_id"
   end
 
+  create_table "user_ratings", force: :cascade do |t|
+    t.integer "rating"
+    t.text "comment"
+    t.bigint "rater_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rater_id"], name: "index_user_ratings_on_rater_id"
+    t.index ["user_id"], name: "index_user_ratings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "last_name", null: false
     t.string "first_name", null: false
@@ -82,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_11_23_122403) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "products_count"
+    t.float "average_rating"
   end
 
   add_foreign_key "market_ratings", "markets"
@@ -92,4 +104,6 @@ ActiveRecord::Schema.define(version: 2019_11_23_122403) do
   add_foreign_key "products", "users"
   add_foreign_key "products_markets", "markets"
   add_foreign_key "products_markets", "products"
+  add_foreign_key "user_ratings", "users"
+  add_foreign_key "user_ratings", "users", column: "rater_id"
 end
