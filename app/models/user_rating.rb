@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserRating < ApplicationRecord
   # == Relations ===================
   belongs_to :rater, class_name: 'User'
