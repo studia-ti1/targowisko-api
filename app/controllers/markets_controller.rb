@@ -6,12 +6,15 @@ class MarketsController < ApplicationController
   before_action :set_market, only: %i[show update add_product remove_product]
 
   def index
-    if Market.count != 0
-      _, @markets = pagy(Market.all, items: params[:items] || Market.count, page: params[:page] || 1)
-    else
-      @markets = []
-    end
-    render json: @markets
+    markets = Market.all.by_user(params[:user_id]).by_name(params[:search_value]).by_product(params[:product_id])
+    markets = if !markets.empty?
+                _, paginated_collection = pagy(markets, items: params[:items] || markets.count, page: params[:page] || 1)
+                paginated_collection
+              else
+                []
+              end
+
+    render json: markets
   end
 
   def top_markets
@@ -46,7 +49,7 @@ class MarketsController < ApplicationController
     events_from_profile = @profile.dig('events', 'data')
     return render json: {} unless events_from_profile
 
-    events_from_profile.each { |event| events << event.extract!('name', 'description', 'id', 'place') }
+    events_from_profile.each { |event| events << event.extract!('name', 'description', 'id', 'place', 'start_time', 'end_time') }
 
     render json: events
   end
