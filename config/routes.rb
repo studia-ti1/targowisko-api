@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     get '/top_markets', to: 'markets#top_markets'
     get '/top_products', to: 'products#top_products'
+    get '/top_users', to: 'users#top_users'
     post 'markets/fetch_from_api', to: 'markets#fetch_from_api'
     post 'products/:product_id/rate', to: 'product_ratings#create'
     post 'markets/:market_id/rate', to: 'market_ratings#create'
