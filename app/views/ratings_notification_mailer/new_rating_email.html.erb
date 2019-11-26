@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Twoje targowisko <%= @market.name %> został właśnie oceniony.</p>
+    <p>
+    Szczegóły oceny:<br>
+    --------------------------
+    </p>
+    <p>Ocena: <%= @market_rating.rating %></p>
+    <p>Komentarz: <%= @market_rating.comment %></p>
+    <p>Utworzone: <%= @market_rating.created_at %></p>
+    <p>
+  </body>
+</html>
