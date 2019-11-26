@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RatingsNotificationMailer < ApplicationMailer
-  default from: 'targowisko@dev.com'
+  default from: 'targowisko.team@gmail.com'
 
   def new_rating_email
     @market = Market.find(params[:market_id])
