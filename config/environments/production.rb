@@ -53,8 +53,7 @@ Rails.application.configure do
     port: 587,
     user_name: 'targowisko.team@gmail.com',
     password: 'Password1!!',
-    authentication: 'plain',
-    enable_starttls_auto: true
+    authentication: 'plain'
   }
 
   # Mount Action Cable outside main process or domain
