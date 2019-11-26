@@ -21,7 +21,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-    p params[:category].class
     render json: @user.products.create!(product_params)
   end
 
