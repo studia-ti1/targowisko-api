@@ -8,7 +8,14 @@ describe 'Markets API' do
       get 'Get saved Markets' do
         tags 'Markets'
         parameter name: 'access-token', :in => :header, schema:[ type: :string ]
-
+        parameter name: :filer, in: :body, schema: {
+            type: :object,
+            properties: {
+                user_id: {type: :integer},
+                search_value: {type: :string},
+                product_id: {type: :integer}
+            },
+        }
         response '200', 'Saved Markets found' do
           run_test!
         end

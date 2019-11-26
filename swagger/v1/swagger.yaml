@@ -45,6 +45,17 @@ paths:
         in: header
         schema:
         - type: string
+      - name: filer
+        in: body
+        schema:
+          type: object
+          properties:
+            user_id:
+              type: integer
+            search_value:
+              type: string
+            product_id:
+              type: integer
       responses:
         '200':
           description: Saved Markets found
