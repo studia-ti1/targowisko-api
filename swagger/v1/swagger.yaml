@@ -456,3 +456,29 @@ paths:
           description: Top Products
         '401':
           description: Unauthorized
+  "/api/v1/users":
+    get:
+      summary: Get all users with at least one product
+      tags:
+      - Users
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: rating
+        in: body
+        schema:
+          type: object
+          properties:
+            user_first_name:
+              type: string
+            user_last_name:
+              type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Users found
+        '401':
+          description: Unauthorized
