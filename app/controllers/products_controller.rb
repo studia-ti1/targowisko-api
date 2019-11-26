@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    p params[:category].class
     render json: @user.products.create!(product_params)
   end
 
@@ -48,6 +49,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.permit(:name, :price, :category, :picture, :category)
+    params.permit(:name, :price, :category, :picture, :description)
   end
 end

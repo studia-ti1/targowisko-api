@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'user_ratings/create'
   scope '/api/v1' do
     resources :markets do
       member do
