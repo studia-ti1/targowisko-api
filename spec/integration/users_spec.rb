@@ -27,4 +27,22 @@ describe 'User API' do
 
   end
 
+  path '/api/v1/users/{id}' do
+
+    get 'Get specified user' do
+      tags 'Users'
+      parameter name: :id, :in => :path, schema:[ type: :string]
+      parameter name: 'access-token', :in => :header, schema:[ type: :string]
+
+      response '200', 'User with id found' do
+        run_test!
+      end
+
+      response '401', 'Unauthorized' do
+        run_test!
+      end
+    end
+
+    end
+
 end

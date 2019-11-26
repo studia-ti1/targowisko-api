@@ -482,3 +482,23 @@ paths:
           description: Users found
         '401':
           description: Unauthorized
+  "/api/v1/users/{id}":
+    get:
+      summary: Get specified user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Saved Market with id found
+        '401':
+          description: Unauthorized
