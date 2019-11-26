@@ -44,7 +44,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   config.action_mailer.delivery_method = :smtp
-  host = 'https://targowisko.herokuapp.com/'
+  host = 'targowisko.herokuapp.com/'
   config.action_mailer.default_url_options = { host: host }
 
   # SMTP settings for gmail
@@ -53,7 +53,8 @@ Rails.application.configure do
     port: 587,
     user_name: 'targowisko.team@gmail.com',
     password: 'Password1!!',
-    authentication: 'plain'
+    authentication: 'plain',
+    enable_starttls_auto: true
   }
 
   # Mount Action Cable outside main process or domain
