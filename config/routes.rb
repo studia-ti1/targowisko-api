@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       member do
         post :add_product
         delete :remove_product
+        post :attend
       end
     end
     resources :products

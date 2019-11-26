@@ -7,6 +7,7 @@ class Market < ApplicationRecord
   has_many :products_markets, dependent: :destroy
   has_many :products, through: :products_markets
   has_many :market_ratings, dependent: :destroy
+  has_many :participants, class_name: 'UserEvent', foreign_key: 'market_id'
   # == Scopes ============================
   scope :by_user, ->(user_id) { where(user_id: user_id) unless user_id.nil? }
   scope :by_name, ->(market_name) { where('lower(name) LIKE ?', "%#{market_name.downcase}%") unless market_name.nil? }

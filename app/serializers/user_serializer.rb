@@ -7,4 +7,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :markets
   has_many :market_ratings
   has_many :product_ratings
+  has_many :user_events
 end

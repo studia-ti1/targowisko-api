@@ -3,7 +3,7 @@
 class MarketsController < ApplicationController
   include Pagy::Backend
   DEFAULT_NUMBER_OF_TOP_MARKETS = 5
-  before_action :set_market, only: %i[show update add_product remove_product]
+  before_action :set_market, only: %i[show update add_product remove_product attend]
 
   # GET /api/v1/markets
   def index
@@ -29,7 +29,7 @@ class MarketsController < ApplicationController
 
   # GET /api/v1/markets/:id
   def show
-    render json: @market
+    render json: JSON.parse(@market.to_json).merge!(going: @user.user_events.pluck(:market_id).include?(@market.id))
   end
 
   # POST /api/v1/create_markets
@@ -74,6 +74,10 @@ class MarketsController < ApplicationController
     market_products.destroy(user_product)
 
     render json: @market
+  end
+
+  def attend
+    render json: @market.participants.create!(user_id: @user.id)
   end
 
   private
