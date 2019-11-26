@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  mount_uploader :avatar, ImageUploader
   # == Relations =========================
-  has_many :products
-  has_many :markets
+  has_many :products, dependent: :destroy
+  has_many :markets, dependent: :destroy
   has_many :market_ratings
   has_many :product_ratings
   has_many :feedback, class_name: 'UserRating', foreign_key: 'user_id'
