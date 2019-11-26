@@ -154,6 +154,32 @@ paths:
           description: Destroy the Market
         '401':
           description: Unauthorized
+  "/api/v1/create_markets":
+    post:
+      summary: Create new Market
+      tags:
+      - Markets
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: event
+        in: body
+        schema:
+          type: object
+          properties:
+            facebook_events_ids:
+              type: array
+              items:
+                type: integer
+      responses:
+        '200':
+          description: Market created
+        '401':
+          description: Unauthorized
   "/api/v1/markets/fetch_from_api":
     post:
       summary: Retrieve user facebook Events
@@ -174,6 +200,8 @@ paths:
       summary: Get top rated Markets
       tags:
       - Markets
+      consumes:
+      - application/json
       parameters:
       - name: access-token
         in: header
@@ -471,7 +499,6 @@ paths:
         - type: string
       responses:
         '200':
-          description: User found
+          description: User with id found
         '401':
           description: Unauthorized
-
