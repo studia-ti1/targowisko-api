@@ -8,7 +8,7 @@ class MarketRating < ApplicationRecord
   after_commit :update_market_rating
 
   def update_market_rating
-    new_rating = market.market_ratings.average(:rating).round(1, half: :up)
-    market.update(average_rating: new_rating)
+    new_rating = market&.market_ratings&.average(:rating)&.round(1, half: :up)
+    market&.update(average_rating: new_rating)
   end
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :products
     resources :users
 
+    delete '/users', to: 'users#destroy'
     get '/top_markets', to: 'markets#top_markets'
     get '/top_products', to: 'products#top_products'
     get '/top_users', to: 'users#top_users'

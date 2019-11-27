@@ -18,6 +18,11 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def destroy
+    @user.destroy!
+    render json: { deleted: true }
+  end
+
   def show
     render json: User.find(params[:id])
   end
