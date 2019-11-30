@@ -27,6 +27,12 @@ class MarketsController < ApplicationController
     render json: markets
   end
 
+  def attending_markets
+    attending_markets_ids = @user.user_events.pluck(:id)
+    markets = Market.where(id: attending_markets_ids)
+    render json: markets
+  end
+
   # GET /api/v1/markets/:id
   def show
     render json: JSON.parse(@market.to_json).merge!(going: @user.user_events.pluck(:market_id).include?(@market.id))
