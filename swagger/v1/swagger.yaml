@@ -1,0 +1,552 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/markets/{id}/rate":
+    post:
+      summary: Comment/rate Market
+      tags:
+      - Market Rating
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: rating
+        in: body
+        schema:
+          type: object
+          properties:
+            rating:
+              type: integer
+            comment:
+              type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Product created
+        '401':
+          description: Unauthorized
+  "/api/v1/markets":
+    get:
+      summary: Get saved Markets
+      tags:
+      - Markets
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: filer
+        in: body
+        schema:
+          type: object
+          properties:
+            user_id:
+              type: integer
+            search_value:
+              type: string
+            product_id:
+              type: integer
+      responses:
+        '200':
+          description: Saved Markets found
+        '401':
+          description: Unauthorized
+  "/api/v1/markets/{id}":
+    get:
+      summary: Get one saved Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Saved Market with id found
+        '401':
+          description: Unauthorized
+    patch:
+      summary: Update Market info
+      tags:
+      - Markets
+      consumes:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: market
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            place:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                location:
+                  type: object
+                  properties:
+                    zip:
+                      type: string
+                    city:
+                      type: string
+                    street:
+                      type: string
+                    country:
+                      type: string
+                    latitude:
+                      type: string
+                    longitude:
+                      type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Updated Market info
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Delete Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Destroy the Market
+        '401':
+          description: Unauthorized
+  "/api/v1/create_markets":
+    post:
+      summary: Create new Market
+      tags:
+      - Markets
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: event
+        in: body
+        schema:
+          type: object
+          properties:
+            facebook_events_ids:
+              type: array
+              items:
+                type: integer
+      responses:
+        '200':
+          description: Market created
+        '401':
+          description: Unauthorized
+  "/api/v1/markets/fetch_from_api":
+    post:
+      summary: Retrieve user facebook Events
+      tags:
+      - Markets
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: Facebook Events found
+        '401':
+          description: Unauthorized
+  "/api/v1/top_markets":
+    get:
+      summary: Get top rated Markets
+      tags:
+      - Markets
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: count
+        in: body
+        schema:
+          type: object
+          properties:
+            count:
+              type: integer
+      responses:
+        '200':
+          description: Top Markets
+        '401':
+          description: Unauthorized
+  "/api/v1/markets/{id}/add_product":
+    post:
+      summary: Add product to the Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product_id
+        in: body
+        schema:
+          type: object
+          properties:
+            product_id:
+              type: integer
+      responses:
+        '200':
+          description: Product added to the Market
+        '401':
+          description: Unauthorized
+  "/api/v1/markets/{id}/remove_product":
+    delete:
+      summary: Remove product from the Market
+      tags:
+      - Markets
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product_id
+        in: body
+        schema:
+          type: object
+          properties:
+            product_id:
+              type: integer
+      responses:
+        '200':
+          description: Product deleted from the Market
+        '401':
+          description: Unauthorized
+  "/api/v1/products/{id}/rate":
+    post:
+      summary: Comment/rate Product
+      tags:
+      - Product Rating
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: rating
+        in: body
+        schema:
+          type: object
+          properties:
+            rating:
+              type: integer
+            comment:
+              type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Product created
+        '401':
+          description: Unauthorized
+  "/api/v1/products":
+    get:
+      summary: Get Products
+      tags:
+      - Products
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            search_value:
+              type: string
+            user_id:
+              type: integer
+            items:
+              type: integer
+            page:
+              type: integer
+            market_id:
+              type: integer
+      responses:
+        '200':
+          description: Filtered Products
+        '401':
+          description: Unauthorized
+    post:
+      summary: Create new Product
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            price:
+              type: integer
+            category:
+              type: string
+      responses:
+        '200':
+          description: Product created
+        '401':
+          description: Unauthorized
+  "/api/v1/products/{id}":
+    get:
+      summary: Get one Product with :id
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: The Product with :id found
+        '401':
+          description: Unauthorized
+    patch:
+      summary: Update Product info
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            price:
+              type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Updated Product info
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Delete Product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: The Product deleted
+        '401':
+          description: Unauthorized
+  "/api/v1/top_products":
+    get:
+      summary: Get top rated Products
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: count
+        in: body
+        schema:
+          type: object
+          properties:
+            count:
+              type: integer
+      responses:
+        '200':
+          description: Top Products
+        '401':
+          description: Unauthorized
+  "/api/v1/users":
+    get:
+      summary: Get all users with at least one product
+      tags:
+      - Users
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: rating
+        in: body
+        schema:
+          type: object
+          properties:
+            user_first_name:
+              type: string
+            user_last_name:
+              type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Users found
+        '401':
+          description: Unauthorized
+  "/api/v1/users/{id}":
+    get:
+      summary: Get specified user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        schema:
+        - type: string
+        required: true
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      responses:
+        '200':
+          description: User with id found
+        '401':
+          description: Unauthorized
+  "/api/v1/top_users":
+    get:
+      summary: Get top rated users with at least one product
+      tags:
+      - Users
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: count
+        in: body
+        schema:
+          type: object
+          properties:
+            count:
+              type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Top Users found
+        '401':
+          description: Unauthorized
+  "/api/v1/users/update_avatar":
+    post:
+      summary: Upload user avatar
+      tags:
+      - Users
+      consumes:
+      - multipart/form-data
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: avatar
+        in: formData
+        schema:
+          type: file
+          format: binary
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Avatar Uploaded
+        '401':
+          description: Unauthorized
