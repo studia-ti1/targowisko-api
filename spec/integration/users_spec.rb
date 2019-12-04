@@ -70,4 +70,28 @@ describe 'User API' do
 
   end
 
+  path '/api/v1/users/update_avatar' do
+
+    post 'Upload user avatar' do
+      tags 'Users'
+      consumes 'multipart/form-data'
+      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+      parameter name: :avatar, :in => :formData, schema: {
+          type: :file,
+          format: :binary
+      }
+      produces 'application/json'
+
+
+      response '200', 'Avatar Uploaded' do
+        run_test!
+      end
+
+      response '401', 'Unauthorized' do
+        run_test!
+      end
+    end
+
+  end
+
 end
