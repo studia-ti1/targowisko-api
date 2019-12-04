@@ -502,3 +502,27 @@ paths:
           description: User with id found
         '401':
           description: Unauthorized
+  "/api/v1/top_users":
+    get:
+      summary: Get top rated users with at least one product
+      tags:
+      - Users
+      parameters:
+      - name: access-token
+        in: header
+        schema:
+        - type: string
+      - name: count
+        in: body
+        schema:
+          type: object
+          properties:
+            count:
+              type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Top Users found
+        '401':
+          description: Unauthorized

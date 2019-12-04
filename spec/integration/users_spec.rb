@@ -43,6 +43,31 @@ describe 'User API' do
       end
     end
 
+  end
+
+  path '/api/v1/top_users' do
+
+    get 'Get top rated users with at least one product' do
+      tags 'Users'
+      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+      parameter name: :count, in: :body, schema: {
+          type: :object,
+          properties: {
+              count: { type: :integer }
+          }
+      }
+      produces 'application/json'
+
+      response '200', 'Top Users found' do
+        run_test!
+      end
+
+      response '401', 'Unauthorized' do
+        run_test!
+      end
     end
+
+
+  end
 
 end
