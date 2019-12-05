@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MarketRatingsController < ApplicationController
-
   # POST /api/v1/markets/:market_id/rate
   def create
     market = Market.find(params[:market_id])

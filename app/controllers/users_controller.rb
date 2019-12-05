@@ -18,6 +18,13 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def api_update_avatar
+    @user.remote_avatar_url = @profile.dig('picture', 'data', 'url')
+    @user.save!
+
+    render json: @user
+  end
+
   def destroy
     @user.destroy!
     render json: { deleted: true }
