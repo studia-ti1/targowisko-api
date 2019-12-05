@@ -61,9 +61,13 @@ class MarketsController < ApplicationController
     events = []
     events_from_profile = @profile.dig('events', 'data')
     return render json: {} unless events_from_profile
+    access_token = request.headers['HTTP_ACCESS_TOKEN']
+    graph = Koala::Facebook::API.new(access_token)
 
-    events_from_profile.each { |event| events << event.extract!('name', 'description', 'id', 'place', 'start_time', 'end_time') }
-
+    events_from_profile.each do |event|
+      photo = graph.get_object(event['id'], fields: %w[cover]).dig('cover', 'source')
+      events << event.extract!('name', 'description', 'id', 'place', 'start_time', 'end_time').merge(photo: photo)
+    end
     render json: events
   end
   # POST /api/v1/markets/:id/add_product
