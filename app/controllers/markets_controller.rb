@@ -70,6 +70,7 @@ class MarketsController < ApplicationController
     end
     render json: events
   end
+
   # POST /api/v1/markets/:id/add_product
   def add_product
     market_products = @market.products
