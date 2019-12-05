@@ -20,6 +20,4 @@ class MarketSerializer < ActiveModel::Serializer
   def participants
     object.participants.count
   end
-
-
 end

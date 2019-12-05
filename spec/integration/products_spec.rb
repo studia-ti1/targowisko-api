@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
 # spec/integration/markets_spec.rb
 require 'swagger_helper'
 
 describe 'Products API' do
-
   path '/api/v1/products' do
-
     get 'Get my Products' do
       tags 'Products'
-      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+      parameter name: 'access-token', in: :header, schema: [type: :string]
 
       response '200', 'Products found' do
         run_test!
@@ -20,16 +20,16 @@ describe 'Products API' do
 
     get 'Get Products' do
       tags 'Products'
-      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+      parameter name: 'access-token', in: :header, schema: [type: :string]
       parameter name: :product, in: :body, schema: {
-          type: :object,
-          properties: {
-              search_value: { type: :string },
-              user_id: { type: :integer },
-              items: { type: :integer },
-              page: { type: :integer },
-              market_id: { type: :integer }
-          },
+        type: :object,
+        properties: {
+          search_value: { type: :string },
+          user_id: { type: :integer },
+          items: { type: :integer },
+          page: { type: :integer },
+          market_id: { type: :integer }
+        }
       }
 
       response '200', 'Filtered Products' do
@@ -44,14 +44,14 @@ describe 'Products API' do
     post 'Create new Product' do
       tags 'Products'
       consumes 'application/json'
-      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+      parameter name: 'access-token', in: :header, schema: [type: :string]
       parameter name: :product, in: :body, schema: {
-          type: :object,
-          properties: {
-              name: { type: :string },
-              price: { type: :integer },
-              category: { type: :string }
-          },
+        type: :object,
+        properties: {
+          name: { type: :string },
+          price: { type: :integer },
+          category: { type: :string }
+        }
       }
 
       response '200', 'Product created' do
@@ -65,11 +65,10 @@ describe 'Products API' do
   end
 
   path '/api/v1/products/{id}' do
-
     get 'Get one Product with :id' do
       tags 'Products'
-      parameter name: :id, :in => :path, schema:[ type: :string]
-      parameter name: 'access-token', :in => :header, schema:[ type: :string]
+      parameter name: :id, in: :path, schema: [type: :string]
+      parameter name: 'access-token', in: :header, schema: [type: :string]
 
       response '200', 'The Product with :id found' do
         run_test!
@@ -83,14 +82,14 @@ describe 'Products API' do
     patch 'Update Product info' do
       tags 'Products'
       consumes 'application/json'
-      parameter name: :id, :in => :path, schema:[ type: :string]
-      parameter name: 'access-token', :in => :header, schema:[ type: :string]
+      parameter name: :id, in: :path, schema: [type: :string]
+      parameter name: 'access-token', in: :header, schema: [type: :string]
       parameter name: :product, in: :body, schema: {
-          type: :object,
-          properties: {
-              name: { type: :string },
-              price: { type: :integer },
-          }
+        type: :object,
+        properties: {
+          name: { type: :string },
+          price: { type: :integer }
+        }
       }
       produces 'application/json'
 
@@ -105,16 +104,15 @@ describe 'Products API' do
 
     delete 'Delete Product' do
       tags 'Products'
-      parameter name: :id, :in => :path, schema:[ type: :string]
-      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
-
+      parameter name: :id, in: :path, schema: [type: :string]
+      parameter name: 'access-token', in: :header, schema: [type: :string]
 
       response '200', 'The Product deleted' do
-        #let(:id) do
+        # let(:id) do
         #   {
         #       status: {type: :string}
         #   }
-        #end
+        # end
         run_test!
       end
 
@@ -122,20 +120,18 @@ describe 'Products API' do
         run_test!
       end
     end
-
   end
 
   path '/api/v1/top_products' do
-
     get 'Get top rated Products' do
       tags 'Products'
       consumes 'application/json'
-      parameter name: 'access-token', :in => :header, schema:[ type: :string ]
+      parameter name: 'access-token', in: :header, schema: [type: :string]
       parameter name: :count, in: :body, schema: {
-          type: :object,
-          properties: {
-              count: { type: :integer }
-          }
+        type: :object,
+        properties: {
+          count: { type: :integer }
+        }
       }
 
       response '200', 'Top Products' do

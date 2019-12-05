@@ -61,6 +61,7 @@ class MarketsController < ApplicationController
     events = []
     events_from_profile = @profile.dig('events', 'data')
     return render json: {} unless events_from_profile
+
     access_token = request.headers['HTTP_ACCESS_TOKEN']
     graph = Koala::Facebook::API.new(access_token)
 
