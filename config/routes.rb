@@ -26,5 +26,6 @@ Rails.application.routes.draw do
     post 'users/:user_id/rate', to: 'user_ratings#create'
     post 'users/update_avatar', to: 'users#update_avatar'
     post 'create_markets', to: 'markets#create_markets'
+    post '/users/api_update_avatar', to: 'users#api_update_avatar'
   end
 end

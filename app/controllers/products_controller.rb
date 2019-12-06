@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
     render json: products
   end
+
   # GET /api/v1/products/:id
   def show
     render json: @user.products.find(params[:id])
