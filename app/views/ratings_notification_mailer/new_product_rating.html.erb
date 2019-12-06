@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Twój produkt <%= @product.name %> został właśnie oceniony.</p>
+    <p>
+    Szczegóły oceny:<br>
+    --------------------------
+    </p>
+    <p>Ocena: <%= @product_rating.rating %></p>
+    <p>Komentarz: <%= @product_rating.comment %></p>
+    <p>Utworzone: <%= @product_rating.created_at %></p>
+    <p>
+  </body>
+</html>
