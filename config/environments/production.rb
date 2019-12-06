@@ -43,28 +43,20 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
-  # config.action_mailer.delivery_method = :smtp
-  # host = 'targowisko.herokuapp.com'
-  # config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.delivery_method = :smtp
+  host = 'targowisko.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
 
-  # # SMTP settings for gmail
-  # config.action_mailer.smtp_settings = {
-  #   address: 'smtp.gmail.com',
-  #   port: 587,
-  #   user_name: 'targowisko.team',
-  #   password: 'ypmqlpzycdqyzisw',
-  #   authentication: 'plain',
-  #   enable_starttls_auto: true
-  # }
-  ActionMailer::Base.smtp_settings = {
-    port: ENV['MAILGUN_SMTP_PORT'],
-    address: ENV['MAILGUN_SMTP_SERVER'],
-    user_name: ENV['MAILGUN_SMTP_LOGIN'],
-    password: ENV['MAILGUN_SMTP_PASSWORD'],
-    domain: 'yourapp.heroku.com',
-    authentication: :plain
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_name: 'targowisko.team@gmail.com',
+    password: 'ypmqlpzycdqyzisw',
+    authentication: 'plain',
+    enable_starttls_auto: true
   }
-  ActionMailer::Base.delivery_method = :smtp
+
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
