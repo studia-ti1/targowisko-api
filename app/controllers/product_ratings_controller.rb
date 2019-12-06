@@ -8,7 +8,7 @@ class ProductRatingsController < ApplicationController
     # send email
     RatingsNotificationMailer.with(product_id: params[:product_id], product_rating_id: rating.id).new_product_rating.deliver_now
 
-    render json:
+    render json: rating
   end
 
   private
