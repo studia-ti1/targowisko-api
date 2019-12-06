@@ -28,7 +28,7 @@ class MarketsController < ApplicationController
   end
 
   def attending_markets
-    attending_markets_ids = @user.user_events.pluck(:id)
+    attending_markets_ids = @user.user_events.pluck(:market_id)
     markets = Market.where(id: attending_markets_ids)
     render json: markets
   end
