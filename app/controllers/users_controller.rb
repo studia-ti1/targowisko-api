@@ -10,7 +10,14 @@ class UsersController < ApplicationController
       @users << user unless user.products.empty?
     end
 
-    render json: @users
+    paginated_users = if !@users.empty?
+                        _, paginated_collection = pagy(@users, items: params[:items] || @users.size, page: params[:page] || 1)
+                        paginated_collection
+                      else
+                        []
+                      end
+
+    render json: paginated_users
   end
 
   def update_avatar
@@ -43,7 +50,14 @@ class UsersController < ApplicationController
     top_users_ids = top_users_avg_ids.map(&:first)
     users = User.where(id: top_users_ids)
 
-    render json: users
+    paginated_users = if !users.empty?
+                        _, paginated_collection = pagy(users, items: params[:items] || users.size, page: params[:page] || 1)
+                        paginated_collection
+                      else
+                        []
+                      end
+
+    render json: paginated_users
   end
 
   private
