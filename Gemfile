@@ -23,7 +23,7 @@ gem 'active_model_serializers'
 gem 'sidekiq'
 
 # file uploading
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 # Azure BlobStorage integration
 gem 'carrierwave-azure', git: 'https://github.com/cmager/carrierwave-azure.git'
 
